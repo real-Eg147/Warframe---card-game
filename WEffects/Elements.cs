@@ -2,7 +2,7 @@
 {
     public class Elements
     {
-        public void Fire(List<Grineer> gr)
+        public void Fire(List<Factions> gr)
         {
             var GrArmor = gr[0].Armor;
             var BurningDamage = GrArmor / 2;

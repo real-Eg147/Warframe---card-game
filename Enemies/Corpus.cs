@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Enemies
 {
-    public class Grineer
+    public class Corpus
     {
         public short id = 0;
         public double Health { get; set; }
@@ -17,7 +17,8 @@ namespace Enemies
         public override string ToString()
         {
 
-            return $"Grineer[{id++}]:{Health}, {Armor}, {Shield}";
+            return $"Corpus[{id++}]:{Health}, {Armor}, {Shield}";
         }
     }
 }
+

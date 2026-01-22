@@ -115,3 +115,16 @@ Health = Health - (BaseDamage * 0.90)
 ```
 
 ⚠️ Attualmente `BaseDamage
+
+Ho aggiunto le altre due fazioni
+Sto aggiungendo le armi, con le seguenti proprietà:
+- Tipi di danno (danno base, critico, effetto, probabilità)
+- Tipi di efffetti
+- Identità (arma 1 tipo assalto, arma 2 tipo cecchino ecc...)
+
+Come dovrebbe funzionare (per ora) il round? A console scegli il tipo di arma e si attacca in automatico
+Serve capire il numero di attacchi (dipende dall'arma scelta) e il danno inflitto (quindi controllo su eventuali protezioni come armature e scudi, anche gli effetti elementali)
+
+Aggiunto il controllo sulla resistenza del nemico (al danno ricevuto, gli viene sottratto un valore in base al valore dell'amatura)
+
+Aggiunto il numero di colpi da poter infliggere in un solo turno

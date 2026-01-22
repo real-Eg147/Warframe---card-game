@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Enemies;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -7,25 +8,45 @@ using System.Threading.Tasks;
 
 namespace WEffects
 {
-    public class Round
+    // Come funziona il round? Una volta scelti gli armamenti decidi con quale attaccare, ogni armamento può colpire più volte nello stesso round (5 colpi = 5 hit per round)
+    public class Round : Weapons
     {
-        int BaseDamage = 1;
-        public List<Weapons> wpns = new List<Weapons>();
-        
+        public List<Damage> damage = new List<Damage>();
         public double newGrHP;
-        public void Attack(List<Grineer> grineer)
+        public double newDamage;
+        public short counter;
+
+        // Nel metodo "Attack" devo fare in modo che si completamente flessibile, deve calcolare ogni statistica di danno in base al nemico che affronta dil giocatore
+        public void Attack(List<Grineer> grineer, List<Weapons> weapon)
         {
-            if (grineer[0].Armor > 20)
+            // Weapon shot determina quanti attacchi fai in un turno solo
+            while (counter < weapon[0].Shot)
             {
-                    newGrHP = grineer[0].Health - (BaseDamage * 0.90);
-                    grineer[0].Health = newGrHP;
+                // Controllo dell'armatura nemica
+                if (grineer[0].Armor > 0)
+                {
+                    newDamage = weapon[0].BaseDamage - (weapon[0].BaseDamage * grineer[0].Armor);
+                    newGrHP = grineer[0].Health - newDamage;
+                }
+                else
+                {
+                    newGrHP = grineer[0].Health - weapon[0].BaseDamage;
+                }
+                Console.WriteLine(newGrHP);
+                counter++;
+            }
+        }
+        public void Attack(List<Corpus> corpus, List<Weapons> weapon)
+        {
+            // Controllo dell'armatura nemica
+            if (corpus[0].Shield > 0)
+            {
+                double newDamage = weapon[0].BaseDamage - corpus[0].Shield;
             }
             else
             {
-                newGrHP = grineer[0].Health - BaseDamage;
-                grineer[0].Health = newGrHP;
+                newGrHP = corpus[0].Health - weapon[0].BaseDamage;
             }
-
             Console.WriteLine(newGrHP);
         }
     }
