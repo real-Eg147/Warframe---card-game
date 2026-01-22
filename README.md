@@ -1,0 +1,1 @@
+Effetto pentrante, ignora armatura
