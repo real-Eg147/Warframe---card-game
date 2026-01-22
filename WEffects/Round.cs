@@ -26,13 +26,13 @@ namespace WEffects
                 if (grineer[0].Armor > 0)
                 {
                     newDamage = weapon[0].BaseDamage - (weapon[0].BaseDamage * grineer[0].Armor);
-                    newGrHP = grineer[0].Health - newDamage;
+                    grineer[0].Health = grineer[0].Health - newDamage;
                 }
                 else
                 {
-                    newGrHP = grineer[0].Health - weapon[0].BaseDamage;
+                    grineer[0].Health = grineer[0].Health - weapon[0].BaseDamage;
                 }
-                Console.WriteLine(newGrHP);
+                Console.WriteLine(grineer[0].Health);
                 counter++;
             }
         }

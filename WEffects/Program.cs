@@ -49,6 +49,7 @@ namespace WEffects
             switch (id_weapon)
             {
                 case 1:
+                    // FUNZIONA! (per ora)
                     weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 3 });
                     // Per attaccare devo sapere quale nemico e con quale arma
                     round.Attack(grineer, weapon);
