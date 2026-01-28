@@ -116,15 +116,67 @@ Health = Health - (BaseDamage * 0.90)
 
 ⚠️ Attualmente `BaseDamage
 
-Ho aggiunto le altre due fazioni
-Sto aggiungendo le armi, con le seguenti proprietà:
-- Tipi di danno (danno base, critico, effetto, probabilità)
-- Tipi di efffetti
-- Identità (arma 1 tipo assalto, arma 2 tipo cecchino ecc...)
+## Sistema di Combattimento – Stato Attuale
 
-Come dovrebbe funzionare (per ora) il round? A console scegli il tipo di arma e si attacca in automatico
-Serve capire il numero di attacchi (dipende dall'arma scelta) e il danno inflitto (quindi controllo su eventuali protezioni come armature e scudi, anche gli effetti elementali)
+Sono state integrate ulteriori **due fazioni** nel sistema di gioco.
 
-Aggiunto il controllo sulla resistenza del nemico (al danno ricevuto, gli viene sottratto un valore in base al valore dell'amatura)
+È in fase di sviluppo il **sistema delle armi**, strutturato secondo le seguenti proprietà:
 
-Aggiunto il numero di colpi da poter infliggere in un solo turno
+### Proprietà delle Armi
+
+- **Tipologie di danno**
+  - Danno base
+  - Danno critico
+  - Effetti speciali
+  - Probabilità di attivazione degli effetti
+- **Tipologie di effetti**
+  - Effetti elementali
+  - Effetti di stato
+- **Identità dell’arma**
+  - Definisce il ruolo dell’arma (es. Assalto, Cecchino, ecc.)
+
+---
+
+## Funzionamento del Round (Versione Attuale)
+
+Durante ogni round, il giocatore seleziona tramite **input da console** il tipo di arma da utilizzare.  
+L’attacco viene quindi **eseguito automaticamente** dal sistema.
+
+Il sistema di combattimento gestisce i seguenti aspetti:
+
+- **Numero di attacchi per turno**
+  - Dipende dall’arma equipaggiata
+- **Calcolo del danno inflitto**
+  - Verifica delle protezioni del bersaglio (armature, scudi)
+  - Applicazione di effetti elementali o speciali (da definire!)
+  - Calcolo dei danni critici (da definire!)
+
+---
+
+## Sistema di Difesa e Resistenze
+
+È stato implementato un **sistema di resistenza del nemico**, che riduce il danno ricevuto in base al valore dell’armatura o della protezione attiva.
+
+- Il danno finale viene calcolato con la seguente formula [DANNO BASE - (DANNO BASE x RESISTENZA)]
+
+Esempio:
+15-(15x0,6) = 15-9 = 6 
+
+- Il sistema è estendibile per resistenze specifiche (es. fuoco, elettricità, corrosione)
+
+---
+
+## Limiti e Supporto Multi-Bersaglio
+
+- È stato introdotto un **limite massimo di colpi infliggibili per turno**
+- Il sistema ora supporta il **combattimento contro più avversari contemporaneamente** ma è ancora limitato
+
+---
+
+## Note di Progettazione
+
+- Il sistema è progettato per essere **modulare ed estendibile**
+- Le regole di calcolo del danno possono essere facilmente adattate a:
+  - PvE
+  - PvP
+  - PvPvE asimmetrico

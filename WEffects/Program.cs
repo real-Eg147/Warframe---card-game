@@ -1,4 +1,5 @@
 ﻿using Enemies;
+using Microsoft.VisualBasic.FileIO;
 
 namespace WEffects
 {
@@ -6,6 +7,9 @@ namespace WEffects
     {
         static void Main(string[] args)
         {
+
+
+
             Factions faction = new Factions();
             List<Grineer> grineer = new List<Grineer>();
             List<Corpus> crps = new List<Corpus>();
@@ -14,13 +18,16 @@ namespace WEffects
             Round round = new Round();
             Damage damage = new Damage();
 
+            #region Generazione avversario
             // Genero l'avversario
+            int myCycle;
+            do
+            {
             Console.WriteLine("Genera avversario:");
             Console.WriteLine("1) Grineer");
             Console.WriteLine("2) Corpus");
             Console.WriteLine("3) Infested");
             int selectEnemy = Convert.ToInt32(Console.ReadLine());
-
 
             switch (selectEnemy)
             {
@@ -35,9 +42,17 @@ namespace WEffects
                     break;
                 
             }
-            // Se Armor >10 allora x0,90 | Se >20 allora x0,80 sul danno finale...
+                Console.WriteLine("Vuoi generarne un altro?");
+                Console.WriteLine("1) SI");
+                Console.WriteLine("2) NO");
+                myCycle = Convert.ToInt32(Console.ReadLine());
 
-            //Genero un'arma e per ora l'arma che si andrà a sceglier edeterminaerà il numero di attacchi
+            } while (myCycle == 1);
+            #endregion
+
+
+
+            //Genero un'arma e per ora l'arma che si andrà a sceglier e determinerà il numero di attacchi
             Console.WriteLine("Genera un'arma da usare:");
             Console.WriteLine("1) Fucile d'assalto ------> | 3 attacchi per turno | 10% probabilità effetto | 20% probabilità critico | +100% danno critico | 1 danno");
             Console.WriteLine("2) Pistola ---------------> | 2 attacchi per turno | 20% probabilità effetto | 20% probabilità critico | +100% danno critico | 2 danno");

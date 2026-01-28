@@ -16,7 +16,7 @@ namespace WEffects
         public double newDamage;
         public short counter;
 
-        // Nel metodo "Attack" devo fare in modo che si completamente flessibile, deve calcolare ogni statistica di danno in base al nemico che affronta dil giocatore
+        // Nel metodo "Attack" devo fare in modo che si completamente flessibile, deve calcolare ogni statistica di danno in base al nemico che affronta del giocatore
         public void Attack(List<Grineer> grineer, List<Weapons> weapon)
         {
             // Weapon shot determina quanti attacchi fai in un turno solo
@@ -41,7 +41,7 @@ namespace WEffects
             // Controllo dell'armatura nemica
             if (corpus[0].Shield > 0)
             {
-                double newDamage = weapon[0].BaseDamage - corpus[0].Shield;
+                newDamage = weapon[0].BaseDamage - corpus[0].Shield;
             }
             else
             {
