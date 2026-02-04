@@ -4,15 +4,70 @@ Questo progetto è un **prototipo di simulatore di combattimento a turni** scrit
 
 L'obiettivo del codice è **sperimentare la logica di combattimento**, non fornire ancora un'architettura finale o bilanciata.
 
+Perlopiù il progetto ha come scopo quello di "giocare" con le classi in C#, migliorandomi in programmazione OOP, mantenimento del codice e altro ancora...
+
 ---
 
 ## 🎯 Obiettivo del progetto
 
-* Generare un **nemico** (attualmente Grineer)
-* Generare un'**arma** con statistiche diverse
+* Generare uno o più **nemici** (attualmente Grineer, Corpus e Infested)
+* Generare una o più **armi** con statistiche diverse
 * Simulare uno o più **attacchi per turno**
-* Applicare **riduzioni del danno** basate sull'armatura
+* Applicare **riduzioni del danno** basate sull'armatura e scudi
 * Preparare il terreno per **status elementali** (Fire, Electric, ecc.)
+
+---
+
+## Nemici
+
+Prendendo ispirazione dal videogioco Warframe, ho deciso di implementare il sistema di **Fazioni**. Nel mio progetto esistono tre fazioni, che sono:
+* Grineer: hanno sempre un valore di **SALUTE** e **ARMATURA**
+* Corpus: **SALUTE** e **SCUDI**
+* Infested **SALUTE**
+
+### Statistiche (salute, armature e scudi)
+Per quanto riguarda le statistiche come la SALUTE, l'ARMATURA e gli SCUDI ho deciso di renderli valori di tipo double (per un codice più versatile e manutenibile nel futuro).
+Inoltre, le statistiche non verranno aggiunte manualmente da me, ma ho creato una **struct** che mi ha permesso di generare questi valori in un range casuale da me scelto.
+E questa logica vale per ogni generazione di ogni nemico di ogni fazione.
+<img width="1387" height="464" alt="image" src="https://github.com/user-attachments/assets/01446015-3ed2-4d87-892c-4fe7b8ec5f8c" />
+<img width="1151" height="637" alt="image" src="https://github.com/user-attachments/assets/c87d07fe-2acc-426b-9d38-e245e924d649" />
+
+Ma come interagiscono con i **danni** ricevuti?
+La salute come gli scudi sono valori che non ha apportano modifiche al danno in arrivo. Perciò se il danno che arriva al nemico è 2 la salute scende di 2 (ovviamente se la salute arriva a 0 il nemico è sconfitto, ma bisogna azzerargli gli scudi prima di fargli danno alla salute).
+L'armatura è una resistenza al danno che apporta modifiche. Ho utilizzato la seguente formula per calcolare la resistenza al danno:
+
+--> DANNO CON ARMATURA = DANNO - (DANNO * ARMATURA) 
+poi 
+--> SALUTE NEMICA = SALUTE NEMICA - DANNO CON ARMATURA
+
+esempio pratico
+
+--> valore_non_ancora_conosciuto = 5 - (5 * 0,2) --> risultato = 4
+--> 20 = 20 - 4 --> risultato 16
+
+Nella formula si evince che il danno in arrivo sia 5, ma quello che riceve il nemico è 4, perchè ha l'armatura 
+
+---
+
+## Effetti elementali
+
+Nel progetto verrà aggiunta la possibilità di applicare un effetto di stato ai nemici.
+Un effetto di stato (o elementale) è un parametro che altera il danno inflitto ai nemici.
+Può influire su salute, armature e scudi, cambiandone il valore. Un singolo effetto può persistere per più turni.
+
+Gli effetti elementali di base si dividono in:
+* Fuoco: dimezza permanentemente l'armatura nemica, e applica danno nel tempo (ogni nuovo turno il nemico subisce danno senza sprecare un'azione di attacco)
+* Elettrico: applichi +100% di danno agli scudi nemici
+* Tossina: dopo aver attaccato un nemico, al prossimo turno tutti gli altri nemici subiscono il 25% del danno che hai inflitto
+* Ghiaccio: quando applicato, il nemico resterà fermo per un turno
+
+Mentre gli effetti elementali combinati sono i seguenti:
+* Corrosivo (tossina + elettrico): quando applicato, sottrai il 26% all'armatura nemica per tre turni (si accumula fino a max di 80%)
+* Radiazione (fuoco + elettrico): quando applicato, il nemico attaccherà un suo alleato per un turno
+* Gas (fuoco + tossina): quando applicato, tutti i nemici subiranno il 50% del danno che gli hai inflitto per tre turni
+* Virale (ghiaccio + tossina): quando applicato, solo la salute nemica subisce un danno extra pari al 100% del tuo danno base per due turni. Si accumula fino a +325%
+* Esplosivo (ghiaccio + fuoco): quando applicato, tutti i nemici subiscono il 30% del tuo danno base. Se accumulato per 10x il danno sarà del 300%
+* Magnetico (ghiaccio + elettrico): quando applicato, solo lo scudo nemico subisce un danno extra pari al 100% del tuo danno base. Si accumula fino a +325%
 
 ---
 
