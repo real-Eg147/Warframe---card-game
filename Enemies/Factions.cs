@@ -1,20 +1,23 @@
 ﻿namespace WEffects
 {
-    public class Factions
+    public abstract class Factions
     {
-        public short id = 0;
+        public short Id { get; }
+        private static short _nextId = 1;
         public double Health { get; set; }
         public double Armor { get; set; }
         public double Shield { get; set; }
 
-        // Gli faccio un override string così quando stampo la lista in un foreach posso vedere i valori
-        public override string ToString() 
+        protected Factions(short id)
         {
-            
-            return $"Grineer[{id++}]:{Health}, {Armor}, {Shield}";
+            Id = _nextId++;
         }
 
-        public List<int> grineer = new();
-        
+        public abstract string Nome { get; }
+
+        public override string ToString()
+        {
+            return $"{Nome}[{Id}] - HP:{Health.ToString("F1")} ARM:{Armor.ToString("F1")} SH:{Shield.ToString("F1")}";
+        }
     }
 }

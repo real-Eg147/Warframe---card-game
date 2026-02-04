@@ -22,7 +22,11 @@ namespace WEffects
             // Weapon shot determina quanti attacchi fai in un turno solo
             while (counter < weapon[0].Shot)
             {
-                // Controllo dell'armatura nemica
+                // ** Controllo dell'armatura nemica **
+                // **
+                // ** Se il nemico ha l'armatura allora NUOVO DANNO assume il valore di DANNO BASE * ARMATURA NEMICA sottratto al DANNO BASE. Quindi SALUTE NEMICA - NUOVO DANNO **
+                // ** Altrimenti SALUTE NEMICA - DANNO BASE **
+
                 if (grineer[0].Armor > 0)
                 {
                     newDamage = weapon[0].BaseDamage - (weapon[0].BaseDamage * grineer[0].Armor);
@@ -38,7 +42,7 @@ namespace WEffects
         }
         public void Attack(List<Corpus> corpus, List<Weapons> weapon)
         {
-            // Controllo dell'armatura nemica
+            // Controllo dello scudo nemico
             if (corpus[0].Shield > 0)
             {
                 newDamage = weapon[0].BaseDamage - corpus[0].Shield;
@@ -46,6 +50,20 @@ namespace WEffects
             else
             {
                 newGrHP = corpus[0].Health - weapon[0].BaseDamage;
+            }
+            Console.WriteLine(newGrHP);
+        }
+
+        public void Attack(List<Infested> infested, List<Weapons> weapon)
+        {
+            // Controllo dell'armatura nemica
+            if (infested[0].Shield > 0)
+            {
+                newDamage = weapon[0].BaseDamage - infested[0].Shield;
+            }
+            else
+            {
+                newGrHP = infested[0].Health - weapon[0].BaseDamage;
             }
             Console.WriteLine(newGrHP);
         }

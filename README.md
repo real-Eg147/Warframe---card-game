@@ -180,3 +180,9 @@ Esempio:
   - PvE
   - PvP
   - PvPvE asimmetrico
+
+
+  4/02/2026
+- In Factions ho modificato l'override string per far si che quando mi vengano mostratati i parametri dei nemici tipo SALUTE, non mi mostri 48,7428875 ma 48,7 (solo un numero dopo la virgola)
+- Ho modificato la logica della generazione dei nemici per mescolarla meglio con li mio codice (prima i nemici si sovrascrivevano a vicenda nel momento della loro generazione, adesso vengono aggiunti uno dopo l'altro come doveva essere all'inizio)
+- Modificato il modo in cui vengono visualizzati i nemici in Program.cs riga 107 (adesso vengono mostrati tutti i nemici insieme alle loro caratteristiche)

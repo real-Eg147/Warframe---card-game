@@ -7,13 +7,11 @@ namespace WEffects
     {
         static void Main(string[] args)
         {
-
-
-
-            Factions faction = new Factions();
+            Random rng = new Random();
+            List<Factions> factions = new();
             List<Grineer> grineer = new List<Grineer>();
-            List<Corpus> crps = new List<Corpus>();
-            List<Infested> inf = new List<Infested>();
+            List<Corpus> corpus = new List<Corpus>();
+            List<Infested> infested = new List<Infested>();
             List<Weapons> weapon = new List<Weapons>();
             Round round = new Round();
             Damage damage = new Damage();
@@ -27,21 +25,32 @@ namespace WEffects
             Console.WriteLine("1) Grineer");
             Console.WriteLine("2) Corpus");
             Console.WriteLine("3) Infested");
-            int selectEnemy = Convert.ToInt32(Console.ReadLine());
+            int spawnEnemy = Convert.ToInt32(Console.ReadLine());
+                switch (spawnEnemy)
+                {
+                    case 1:
+                        factions.Add(new Grineer((short)(factions.Count + 1), rng));
+                        break;
+                    case 2:
+                        factions.Add(new Corpus((short)(factions.Count + 1), rng));
+                        break;
+                    case 3:
+                        factions.Add(new Infested((short)(factions.Count + 1), rng));
+                        break;
+                }
+                //List<Factions> factions = new()
+                //{
+                //    new Corpus(1, rng),
+                //    new Grineer(2, rng),
+                //    new Infested(3, rng)
+                //};
 
-            switch (selectEnemy)
-            {
-                case 1:
-                        grineer.Add(new Grineer { id = 0, Health = 20, Armor = 0.25, Shield = 0 });
-                    break;
-                case 2:
-                        crps.Add(new Corpus { id = 0, Health = 10, Armor = 0, Shield = 20 });
-                    break;
-                case 3:
-                        inf.Add(new Infested { id = 0, Health = 15, Armor = 0, Shield = 0 });
-                    break;
-                
-            }
+                Console.WriteLine("I nemici sono stati generati");
+                foreach (var f in factions)
+                {
+                    Console.WriteLine(f);
+                }
+
                 Console.WriteLine("Vuoi generarne un altro?");
                 Console.WriteLine("1) SI");
                 Console.WriteLine("2) NO");
@@ -51,42 +60,70 @@ namespace WEffects
             #endregion
 
 
-
+            #region Sistema di turni e di attacco
+            #region Scelta dell'arma
             //Genero un'arma e per ora l'arma che si andrà a sceglier e determinerà il numero di attacchi
             Console.WriteLine("Genera un'arma da usare:");
             Console.WriteLine("1) Fucile d'assalto ------> | 3 attacchi per turno | 10% probabilità effetto | 20% probabilità critico | +100% danno critico | 1 danno");
             Console.WriteLine("2) Pistola ---------------> | 2 attacchi per turno | 20% probabilità effetto | 20% probabilità critico | +100% danno critico | 2 danno");
             Console.WriteLine("3) Fucile a pompa --------> | 1 attacchi per turno | 50% probabilità effetto | 10% probabilità critico | +50% danno critico | 4 danno");
             Console.WriteLine("4) Fucile di precisione --> | 1 attacchi per turno | 30% probabilità effetto | 40% probabilità critico | +250% danno critico | 4 danno");
-
             int id_weapon = Convert.ToInt32(Console.ReadLine());
-
-            switch (id_weapon)
+            if (id_weapon == 1)
             {
-                case 1:
-                    // FUNZIONA! (per ora)
-                    weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 3 });
-                    // Per attaccare devo sapere quale nemico e con quale arma
-                    round.Attack(grineer, weapon);
-                    break;
-                case 2:
-                    
-                    weapon.Add(new Weapons { BaseDamage = 2, CritDamage = 2, CritChance = 0.2, StatusChance = 0.2, Shot = 2 });
-
-                    break;
-                case 3:
-
-                    weapon.Add(new Weapons { BaseDamage = 4, CritDamage = 0.5, CritChance = 0.1, StatusChance = 0.5, Shot = 1 });
-;
-                    break;
-                case 4:
-
-                    weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 1 });
-
-
-                    break;
+                weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 3 });
             }
+            else if (id_weapon == 2)
+            {
+                weapon.Add(new Weapons { BaseDamage = 2, CritDamage = 2, CritChance = 0.2, StatusChance = 0.2, Shot = 2 });
+            }
+            else if (id_weapon == 3)
+            {
+                weapon.Add(new Weapons { BaseDamage = 4, CritDamage = 0.5, CritChance = 0.1, StatusChance = 0.5, Shot = 1 });
+            }
+            else if (id_weapon == 4)
+            {
+                weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 1 });
 
+            }
+            #endregion
+
+            // Scelgo il nemico da attaccare
+            Console.WriteLine("Quale nemico vuoi attaccare?");
+            #region Vecchio codice
+            //foreach (var unit in grineer)
+            //{
+            //    Console.WriteLine($"Grineer: {unit}");
+            //}
+            //foreach (var unit in corpus)
+            //{
+            //    Console.WriteLine($"corpus: {unit}");
+            //}
+            //foreach (var unit in infested)
+            //{
+            //    Console.WriteLine($"infested: {unit}");
+            //}
+            #endregion
+            for (int i = 0; i < factions.Count; i++)
+            {
+                Console.WriteLine($"--- {factions[i]}");
+            }
+            switch (id_weapon)
+                {
+                    case 1:
+                        // FUNZIONA! (per ora)
+                        // Per attaccare devo sapere quale nemico e con quale arma
+                        // Ora il 28/01/2026 devo sapere quanti nemici devo attaccare
+                        round.Attack(grineer, weapon);
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+            #endregion
 
             foreach (var gr in grineer)
             {
