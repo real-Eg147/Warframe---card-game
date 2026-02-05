@@ -18,9 +18,9 @@ namespace WEffects
 
             #region Generazione avversario
             // Genero l'avversario
-            int myCycle;
-            do
-            {
+            //int myCycle;
+            //do
+            //{
             Console.WriteLine("Genera avversario:");
             Console.WriteLine("1) Grineer");
             Console.WriteLine("2) Corpus");
@@ -29,14 +29,21 @@ namespace WEffects
                 switch (spawnEnemy)
                 {
                     case 1:
-                        factions.Add(new Grineer((short)(factions.Count + 1), rng));
+                    var g = new Grineer((short)grineer.Count, rng);
+                    grineer.Add(g);
+                    factions.Add(g);
                         break;
                     case 2:
-                        factions.Add(new Corpus((short)(factions.Count + 1), rng));
-                        break;
+                    var c = new Corpus((short)corpus.Count, rng);
+                    corpus.Add(c);
+                    factions.Add(c);
+                    //factions.Add(new Corpus((short)(factions.Count + 1), rng));
+                    break;
                     case 3:
-                        factions.Add(new Infested((short)(factions.Count + 1), rng));
-                        break;
+                    var i = new Infested((short)infested.Count, rng);
+                    infested.Add(i);
+                    factions.Add(i);
+                    break;
                 }
                 //List<Factions> factions = new()
                 //{
@@ -45,18 +52,18 @@ namespace WEffects
                 //    new Infested(3, rng)
                 //};
 
-                Console.WriteLine("I nemici sono stati generati");
+                Console.WriteLine("Il nemico è stato generato");
                 foreach (var f in factions)
                 {
                     Console.WriteLine(f);
                 }
 
-                Console.WriteLine("Vuoi generarne un altro?");
-                Console.WriteLine("1) SI");
-                Console.WriteLine("2) NO");
-                myCycle = Convert.ToInt32(Console.ReadLine());
+                //Console.WriteLine("Vuoi generarne un altro?");
+                //Console.WriteLine("1) SI");
+                //Console.WriteLine("2) NO");
+                //myCycle = Convert.ToInt32(Console.ReadLine());
 
-            } while (myCycle == 1);
+            //} while (myCycle == 1);
             #endregion
 
 
@@ -71,54 +78,44 @@ namespace WEffects
             int id_weapon = Convert.ToInt32(Console.ReadLine());
             if (id_weapon == 1)
             {
-                weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 3 });
+                weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 20, StatusChance = 0.1, Shot = 3 });
             }
             else if (id_weapon == 2)
             {
-                weapon.Add(new Weapons { BaseDamage = 2, CritDamage = 2, CritChance = 0.2, StatusChance = 0.2, Shot = 2 });
+                weapon.Add(new Weapons { BaseDamage = 2, CritDamage = 2, CritChance = 20, StatusChance = 0.2, Shot = 2 });
             }
             else if (id_weapon == 3)
             {
-                weapon.Add(new Weapons { BaseDamage = 4, CritDamage = 0.5, CritChance = 0.1, StatusChance = 0.5, Shot = 1 });
+                weapon.Add(new Weapons { BaseDamage = 4, CritDamage = 0.5, CritChance = 10, StatusChance = 0.5, Shot = 1 });
             }
             else if (id_weapon == 4)
             {
-                weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 0.2, StatusChance = 0.1, Shot = 1 });
+                weapon.Add(new Weapons { BaseDamage = 1, CritDamage = 2, CritChance = 10, StatusChance = 0.1, Shot = 1 });
 
             }
             #endregion
 
             // Scelgo il nemico da attaccare
-            Console.WriteLine("Quale nemico vuoi attaccare?");
-            #region Vecchio codice
-            //foreach (var unit in grineer)
+            //Console.WriteLine("Quale nemico vuoi attaccare?");
+            //for (int i = 0; i < factions.Count; i++)
             //{
-            //    Console.WriteLine($"Grineer: {unit}");
+            //    Console.WriteLine($"--- {factions[i]}");
             //}
-            //foreach (var unit in corpus)
-            //{
-            //    Console.WriteLine($"corpus: {unit}");
-            //}
-            //foreach (var unit in infested)
-            //{
-            //    Console.WriteLine($"infested: {unit}");
-            //}
-            #endregion
-            for (int i = 0; i < factions.Count; i++)
-            {
-                Console.WriteLine($"--- {factions[i]}");
-            }
-            switch (id_weapon)
+
+
+            switch (spawnEnemy)
                 {
                     case 1:
-                        // FUNZIONA! (per ora)
-                        // Per attaccare devo sapere quale nemico e con quale arma
-                        // Ora il 28/01/2026 devo sapere quanti nemici devo attaccare
-                        round.Attack(grineer, weapon);
+                    // FUNZIONA! (per ora)
+                    // Per attaccare devo sapere quale nemico e con quale arma
+                    // Ora il 28/01/2026 devo sapere quanti nemici devo attaccare
+                    round.Attack(grineer, weapon);
                         break;
                     case 2:
+                        round.Attack(corpus, weapon);
                         break;
                     case 3:
+                        round.Attack(infested, weapon);
                         break;
                     case 4:
                         break;

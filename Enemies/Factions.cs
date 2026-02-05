@@ -10,7 +10,7 @@
 
         protected Factions(short id)
         {
-            Id = _nextId++;
+            Id = Id;
         }
 
         public abstract string Nome { get; }
