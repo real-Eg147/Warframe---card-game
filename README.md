@@ -255,3 +255,6 @@ Ho aggiunto la possibilità di infliggere danni agli scudi nemici, potendosi cos
 
   10/02/2026
 Aggiunto la possibiità di infliggere danni critici anche agli infested
+PULIZA DEL CODICE e CONTROLLO DEGLI ERRORI
+Ho modificato la classe "Round", adesso esiste un solo metodo "Attack" dove è possibile controllare l'esistenza di eventuali resistenze al danno, interagirci e danneggiare il nemico (prima avevo tanti overload di "Attack" quante sono le fazioni)
+Calibrazione delle statistiche delle armi (in base alle statistiche dei nemici)
