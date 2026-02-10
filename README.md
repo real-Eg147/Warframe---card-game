@@ -241,10 +241,17 @@ Esempio:
 - In Factions ho modificato l'override string per far si che quando mi vengano mostratati i parametri dei nemici tipo SALUTE, non mi mostri 48,7428875 ma 48,7 (solo un numero dopo la virgola)
 - Ho modificato la logica della generazione dei nemici per mescolarla meglio con li mio codice (prima i nemici si sovrascrivevano a vicenda nel momento della loro generazione, adesso vengono aggiunti uno dopo l'altro come doveva essere all'inizio)
 - Modificato il modo in cui vengono visualizzati i nemici in Program.cs riga 107 (adesso vengono mostrati tutti i nemici insieme alle loro caratteristiche)
-- Modificato il modo in cui vengono visualizzati i nemici in Program.cs riga 107 (adesso vengono mostrati tutti i nemici insieme alle loro caratteristiche)
 
+- 
   05/02/2026
 Ho deciso di fare un passo indietro, togliendo la possibilità di generare più nemici, e mantenendo il focus sul calcolo del danno sul singolo nemico.
 In questo modo il mio software fungerà da "simulatore di danno" piuttosto che "gioco di carte". Ma avendo già una base solida, in futuro si potrà evolvere
 
 Ho aggiunto il sistema di "probabilità colpo critico" e "danno critico". Ora è possibile applicare un danno critico ad un nemico, basato sul paremetro dell'arma (ogni arma ha una probabilità e danno critico diverso)
+
+
+  06/02/2026
+Ho aggiunto la possibilità di infliggere danni agli scudi nemici, potendosi così infrangere e potendo infliggere danno, successivamente, alla salute nemica (Grineer e Corpus)
+
+  10/02/2026
+Aggiunto la possibiità di infliggere danni critici anche agli infested

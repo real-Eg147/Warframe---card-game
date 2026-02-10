@@ -109,7 +109,7 @@ namespace WEffects
                     // FUNZIONA! (per ora)
                     // Per attaccare devo sapere quale nemico e con quale arma
                     // Ora il 28/01/2026 devo sapere quanti nemici devo attaccare
-                    round.Attack(grineer, weapon);
+                        round.Attack(grineer, weapon);
                         break;
                     case 2:
                         round.Attack(corpus, weapon);

@@ -12,7 +12,7 @@ namespace WEffects
     public class Round : Weapons
     {
         public List<Damage> damage = new List<Damage>();
-        public double newGrHP;
+        public double newHP;
         public double newDamage;
         public short counter;
         public Random rnd = new Random();
@@ -48,36 +48,57 @@ namespace WEffects
                     g[0].Health = g[0].Health - weapon[0].BaseDamage;
                 }
 
-                Console.WriteLine(g[0].Health);
+                Console.WriteLine(g[0].Health.ToString("F1"));
                 counter++;
             }
         }
-        public void Attack(List<Corpus> corpus, List<Weapons> weapon)
+        public void Attack(List<Corpus> c, List<Weapons> weapon)
         {
-            // Controllo dello scudo nemico
-            if (corpus[0].Shield > 0)
+            while (counter < weapon[0].Shot)
             {
-                newDamage = weapon[0].BaseDamage - corpus[0].Shield;
+                // Controllo dello scudo nemico
+                if (c[0].Shield < 1) 
+                { 
+                    c[0].Shield = 0;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Scudi infranti!");
+                    Console.ResetColor();
+                    newDamage = c[0].Health - weapon[0].BaseDamage;
+                    c[0].Health = newDamage;
+                }
+                else if (c[0].Shield >= 1)
+                {
+                    Console.WriteLine("SCUDI");
+                    newDamage =  c[0].Shield - weapon[0].BaseDamage;
+                    c[0].Shield = newDamage;
+                }
+                Console.WriteLine(newDamage.ToString("F1"));
+                counter++;
             }
-            else
-            {
-                newGrHP = corpus[0].Health - weapon[0].BaseDamage;
-            }
-            Console.WriteLine(newGrHP);
         }
 
         public void Attack(List<Infested> infested, List<Weapons> weapon)
         {
-            // Controllo dell'armatura nemica
-            if (infested[0].Shield > 0)
+            while (counter < weapon[0].Shot)
             {
-                newDamage = weapon[0].BaseDamage - infested[0].Shield;
+                var CritChance = rnd.Next(0, 100);
+                if (CritChance <= weapon[0].CritChance)
+                {
+                    infested[0].Health = infested[0].Health - (weapon[0].BaseDamage * weapon[0].CritDamage);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Danno critico!");
+                    Console.ResetColor();
+                    Console.WriteLine(infested[0].Health.ToString("F1"));
+                    counter++;
+                }
+                else
+                {
+                    infested[0].Health = infested[0].Health - weapon[0].BaseDamage;
+                    Console.WriteLine(infested[0].Health.ToString("F1"));
+                    counter++;
+                }
             }
-            else
-            {
-                newGrHP = infested[0].Health - weapon[0].BaseDamage;
-            }
-            Console.WriteLine(newGrHP);
+
         }
     }
 }
