@@ -1,6 +1,4 @@
 ﻿using Enemies;
-using Microsoft.VisualBasic.FileIO;
-
 namespace WEffects
 {
     public class Program
@@ -14,7 +12,7 @@ namespace WEffects
             List<Infested> infested = new List<Infested>();
             List<Weapons> weapon = new List<Weapons>();
             Round round = new Round();
-            Damage damage = new Damage();
+            Elements_enum status = new Elements_enum();
 
             #region Generazione avversario
             // Genero l'avversario
@@ -65,34 +63,35 @@ namespace WEffects
             #region Sistema di turni e di attacco
             #region Scelta dell'arma
 
-            //Genero un'arma e per ora l'arma che si andrà a sceglier e determinerà il numero di attacchi
+            //Genero un'arma e per ora l'arma che si andrà a scegliere determinerà il numero di attacchi
             Console.WriteLine("Genera un'arma da usare:");
-            Console.WriteLine("1) Fucile d'assalto ------> | 3 attacchi per turno | 10% probabilità effetto | 20% probabilità critico | +100% danno critico | 1 danno");
-            Console.WriteLine("2) Pistola ---------------> | 2 attacchi per turno | 20% probabilità effetto | 20% probabilità critico | +100% danno critico | 2 danno");
-            Console.WriteLine("3) Fucile a pompa --------> | 1 attacchi per turno | 50% probabilità effetto | 10% probabilità critico | +50% danno critico | 4 danno");
-            Console.WriteLine("4) Fucile di precisione --> | 1 attacchi per turno | 30% probabilità effetto | 40% probabilità critico | +250% danno critico | 4 danno");
+            Console.WriteLine("1) Fucile d'assalto ------> | 4 attacchi per turno | 10% probabilità effetto | 20% probabilità critico | +100% danno critico | 6 danno");
+            Console.WriteLine("2) Pistola ---------------> | 3 attacchi per turno | 20% probabilità effetto | 25% probabilità critico | +50% danno critico | 10 danno");
+            Console.WriteLine("3) Fucile a pompa --------> | 2 attacchi per turno | 50% probabilità effetto | 7% probabilità critico | +200% danno critico | 14 danno");
+            Console.WriteLine("4) Fucile di precisione --> | 1 attacchi per turno | 30% probabilità effetto | 15% probabilità critico | +250% danno critico | 20 danno");
             int id_weapon = Convert.ToInt32(Console.ReadLine());
 
             if (id_weapon == 1)
             {
-                weapon.Add(new Weapons { BaseDamage = 6, CritDamage = 2, CritChance = 20, StatusChance = 0.1, Shot = 4 });
+                weapon.Add(new Weapons { BaseDamage = 6, CritDamage = 2, CritChance = 20, StatusChance = 50, Status = 2, Shot = 4 });
             }
             else if (id_weapon == 2)
             {
-                weapon.Add(new Weapons { BaseDamage = 10, CritDamage = 1.5, CritChance = 25, StatusChance = 0.2, Shot = 3 });
+                weapon.Add(new Weapons { BaseDamage = 10, CritDamage = 1.5, CritChance = 25, StatusChance = 60, Status = 1, Shot = 3 });
             }
             else if (id_weapon == 3)
             {
-                weapon.Add(new Weapons { BaseDamage = 14, CritDamage = 3, CritChance = 7, StatusChance = 0.5, Shot = 2 });
+                weapon.Add(new Weapons { BaseDamage = 14, CritDamage = 3, CritChance = 7, StatusChance = 15, Status = 1, Shot = 2 });
             }
             else if (id_weapon == 4)
             {
-                weapon.Add(new Weapons { BaseDamage = 20, CritDamage = 3.5, CritChance = 15, StatusChance = 0.1, Shot = 1 });
+                weapon.Add(new Weapons { BaseDamage = 20, CritDamage = 3.5, CritChance = 15, StatusChance = 25, Status = 1, Shot = 1 });
 
             }
             #endregion
 
             round.Attack(factions, weapon);
+            //round.Fire(factions, weapon);
 
             #endregion
         }

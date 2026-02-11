@@ -1,6 +1,6 @@
 ﻿namespace WEffects
 {
-    public class Damage : Elements
+    public class Damage : Elements_class
     {
         // Ogni arma ha il suo [DANNO BASE] [DANNO CRITICO] [DANNO EFFETTO] [PROBABILITA' DI CRITICO] [PROBABILITA' EFFETTO] 
         public int id { get; set; }
@@ -10,6 +10,7 @@
         public double StatusChance { get; set; }
         public double CritChance { get; set; }
         public short Shot { get; set; }
+        public short Status { get; set; }
 
         
     }
