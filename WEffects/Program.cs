@@ -10,7 +10,7 @@ namespace WEffects
             List<Grineer> grineer = new List<Grineer>();
             List<Corpus> corpus = new List<Corpus>();
             List<Infested> infested = new List<Infested>();
-            List<Weapons> weapon = new List<Weapons>();
+            List<Weapon> weapon = new List<Weapon>();
             Round round = new Round();
             Elements_enum status = new Elements_enum();
 
@@ -73,25 +73,24 @@ namespace WEffects
 
             if (id_weapon == 1)
             {
-                weapon.Add(new Weapons { BaseDamage = 6, CritDamage = 2, CritChance = 20, StatusChance = 50, Status = 2, Shot = 4 });
+                weapon.Add(new Weapon { BaseDamage = 6, CritDamage = 2, CritChance = 20, StatusChance = 50, Status = 5, Shot = 4 });
             }
             else if (id_weapon == 2)
             {
-                weapon.Add(new Weapons { BaseDamage = 10, CritDamage = 1.5, CritChance = 25, StatusChance = 60, Status = 1, Shot = 3 });
+                weapon.Add(new Weapon { BaseDamage = 10, CritDamage = 1.5, CritChance = 25, StatusChance = 60, Status = 2, Shot = 3 });
             }
             else if (id_weapon == 3)
             {
-                weapon.Add(new Weapons { BaseDamage = 14, CritDamage = 3, CritChance = 7, StatusChance = 15, Status = 1, Shot = 2 });
+                weapon.Add(new Weapon { BaseDamage = 14, CritDamage = 3, CritChance = 7, StatusChance = 15, Status = 3, Shot = 2 });
             }
             else if (id_weapon == 4)
             {
-                weapon.Add(new Weapons { BaseDamage = 20, CritDamage = 3.5, CritChance = 15, StatusChance = 25, Status = 1, Shot = 1 });
+                weapon.Add(new Weapon { BaseDamage = 20, CritDamage = 3.5, CritChance = 15, StatusChance = 25, Status = 1, Shot = 1 });
 
             }
             #endregion
 
             round.Attack(factions, weapon);
-            //round.Fire(factions, weapon);
 
             #endregion
         }

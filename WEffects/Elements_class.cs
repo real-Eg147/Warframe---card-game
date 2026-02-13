@@ -5,7 +5,7 @@
         public short counterEffect;
         public Random rnd = new Random();
         private short ping = 0;
-        public void Fire(List<Factions> factions, List<Weapons> weapon)
+        public void Fire(List<Factions> factions, List<Weapon> weapon)
         {
             var StatusChance = rnd.Next(0, 100);
             // *** FUOCO ***
@@ -35,7 +35,7 @@
         }
 
 
-        public void Electric(List<Factions> factions, List<Weapons> weapon)
+        public void Electric(List<Factions> factions, List<Weapon> weapon)
         {
             var StatusChance = rnd.Next(0, 100);
             if (StatusChance <= weapon[0].StatusChance)
@@ -55,7 +55,7 @@
 
         }
 
-        public void Toxic(List<Factions> factions, List<Weapons> weapon)
+        public void Toxic(List<Factions> factions, List<Weapon> weapon)
         {
             var StatusChance = rnd.Next(0, 100);
             // *** TOSSCITà ***
@@ -84,9 +84,36 @@
         }
 
 
-        public void Viral(List<Factions> factions)
+        public void Viral(List<Factions> factions, List<Weapon> weapon)
         {
-
+            // Il danno viral non ignore ne armatura e ne scudi, viene applicato solo quando gli scudi sono infranti, e applica un danno bonus alla solute per ogni colpo sferrato
+            if (factions[0].Shield == 0)
+            {
+                double stack = 1.0;
+                var StatusChance = rnd.Next(0, 100);
+                if (StatusChance <= weapon[0].StatusChance)
+                {
+                    if (weapon[0].Status == 5)
+                    {
+                        do
+                        {
+                            stack = stack + 0.15;
+                            weapon[0].BaseDamage = weapon[0].BaseDamage * stack;
+                            if (factions[0].Armor > 0.0)
+                            {
+                                weapon[0].BaseDamage = weapon[0].BaseDamage - (weapon[0].BaseDamage * factions[0].Armor);
+                            }
+                            factions[0].Health -= weapon[0].BaseDamage;
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.WriteLine($"Danno virale! bonus danno +{stack.ToString("F1")}");
+                            Console.ResetColor();
+                            Console.WriteLine(factions[0].Health.ToString("F1"));
+                            counterEffect++;
+                        } while (counterEffect < 3);
+                    }
+                }
+                counterEffect = 0;
+            }
         }
 
         public void Magnetic(List<Factions> factions)

@@ -260,3 +260,10 @@ Ho modificato la classe "Round", adesso esiste un solo metodo "Attack" dove è p
 Calibrazione delle statistiche delle armi (in base alle statistiche dei nemici)
 
 Predisposizione alle "mod" (test degli effetti elementali)
+
+Test degli effetti elementali (fuoco, elettrico e tossico)
+
+  13/02/2026
+Ho racchiuso in un metodo (CalculateDamage) il calcolo del danno, dentro la classe Weapon. 
+- Si occuperà di verificare se il nemico ha SCUDI, ARMATURE e SALUTE
+- Assegnerà le priorità (il danno verrà inflitto prima gli scudi, e poi se saranno infranti si passa alla salute. Se la salute ha l'armatura, allora verrà calcolata)
