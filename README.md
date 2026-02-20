@@ -237,33 +237,148 @@ Esempio:
   - PvPvE asimmetrico
 
 
-  4/02/2026
-- In Factions ho modificato l'override string per far si che quando mi vengano mostratati i parametri dei nemici tipo SALUTE, non mi mostri 48,7428875 ma 48,7 (solo un numero dopo la virgola)
-- Ho modificato la logica della generazione dei nemici per mescolarla meglio con li mio codice (prima i nemici si sovrascrivevano a vicenda nel momento della loro generazione, adesso vengono aggiunti uno dopo l'altro come doveva essere all'inizio)
-- Modificato il modo in cui vengono visualizzati i nemici in Program.cs riga 107 (adesso vengono mostrati tutti i nemici insieme alle loro caratteristiche)
+📅 04/02/2026
 
-- 
-  05/02/2026
-Ho deciso di fare un passo indietro, togliendo la possibilità di generare più nemici, e mantenendo il focus sul calcolo del danno sul singolo nemico.
-In questo modo il mio software fungerà da "simulatore di danno" piuttosto che "gioco di carte". Ma avendo già una base solida, in futuro si potrà evolvere
+🔧 Miglioramenti alla Classe Factions
 
-Ho aggiunto il sistema di "probabilità colpo critico" e "danno critico". Ora è possibile applicare un danno critico ad un nemico, basato sul paremetro dell'arma (ogni arma ha una probabilità e danno critico diverso)
+Modificato l’override del metodo ToString() per migliorare la leggibilità dei parametri del nemico.
+I valori numerici (es. SALUTE) ora vengono mostrati con una sola cifra decimale.
+
+Prima: 48,7428875
+
+Ora: 48,7
+
+🧠 Revisione Logica Generazione Nemici
+
+Corretta la logica di generazione.
+In precedenza i nemici si sovrascrivevano durante la creazione.
+Ora vengono correttamente aggiunti alla lista uno dopo l’altro, come previsto dal design iniziale.
+
+🖥 Miglioramento Visualizzazione Nemici
+
+Modificata la visualizzazione in Program.cs (riga 107).
+Ora tutti i nemici vengono mostrati contemporaneamente con le rispettive statistiche.
+
+📅 05/02/2026
+🔄 Cambio Direzione del Progetto
+
+Rimossa temporaneamente la possibilità di generare più nemici.
+Il focus viene spostato sul calcolo del danno su un singolo bersaglio.
+
+📌 Obiettivo:
+
+Trasformare il software in un Simulatore di Danno, invece che in un “gioco di carte”.
+Grazie alla base già sviluppata, il progetto potrà comunque evolvere in futuro verso una struttura più complessa.
+
+💥 Implementazione Sistema Critico
+
+Aggiunta la probabilità di Colpo Critico.
+Aggiunto il Moltiplicatore di Danno Critico.
+
+Ogni arma possiede:
+Probabilità di critico personalizzata
+
+Danno critico differente
+Ora il danno può essere aumentato dinamicamente in base alle statistiche dell’arma.
+
+📅 06/02/2026
+🛡 Implementazione Sistema Scudi
+
+Aggiunta la possibilità di infliggere danno agli scudi nemici.
+
+Gli scudi possono essere:
+Danneggiati
+Infranti
+
+Solo dopo la rottura degli scudi il danno passa alla salute.
+Applicato a:
+
+Corpus
+
+📅 10/02/2026
+💀 Danno Critico sugli Infested
+
+Esteso il sistema di colpo critico anche alla fazione Infested.
+
+🧹 Refactoring e Pulizia Codice
+
+Rimozione overload multipli del metodo Attack.
+Ora esiste un solo metodo Attack nella classe Round.
+
+Il metodo:
+
+Verifica eventuali resistenze
+Interagisce con esse applicando il danno correttamente
+
+✔ Codice più modulare
+✔ Più leggibile
+✔ Più scalabile
+
+⚖ Calibrazione Statistiche Armi
+
+Ribilanciamento delle statistiche in base ai parametri dei nemici.
+Miglior equilibrio tra danno base e sopravvivenza nemica.
+
+🧩 Predisposizione Sistema “Mod”
+
+Preparazione dell’architettura per l’aggiunta di modificatori.
+Test iniziali sugli effetti elementali:
+
+🔥 Fuoco
+
+⚡ Elettrico
+
+☣ Tossico
+
+📅 13/02/2026
+🧮 Centralizzazione del Calcolo del Danno
+
+Creato il metodo CalculateDamage() nella classe Weapon.
+
+Tutta la logica di danno è ora incapsulata nell’arma.
+
+Il metodo si occupa di verificare presenza di:
+
+ - SCUDI
+
+ - ARMATURA
+
+ - SALUTE
+
+Stabilire la priorità di danno:
+
+ - Prima gli Scudi
+
+ - Poi la Salute
+
+Se presente Armatura → applicare mitigazione
+
+✔ Architettura più pulita
+✔ Separazione delle responsabilità migliorata
+
+📅 20/02/2026
+☣ Implementazione Effetto Elementale “Corrosivo”
+
+Aggiunto l’effetto elementale Corrosivo.
+
+Interagisce con le statistiche del nemico.
+
+🔄 Modifica Metodo CalculateDamage -> Rimossi i return -> Sostituiti con Console.WriteLine() per ottenere maggiore flessibilità durante i test.
+
+📌 Motivazione:
+Permettere un controllo più dettagliato del flusso di esecuzione durante il debugging.
 
 
-  06/02/2026
-Ho aggiunto la possibilità di infliggere danni agli scudi nemici, potendosi così infrangere e potendo infliggere danno, successivamente, alla salute nemica (Grineer e Corpus)
 
-  10/02/2026
-Aggiunto la possibiità di infliggere danni critici anche agli infested
-PULIZA DEL CODICE e CONTROLLO DEGLI ERRORI
-Ho modificato la classe "Round", adesso esiste un solo metodo "Attack" dove è possibile controllare l'esistenza di eventuali resistenze al danno, interagirci e danneggiare il nemico (prima avevo tanti overload di "Attack" quante sono le fazioni)
-Calibrazione delle statistiche delle armi (in base alle statistiche dei nemici)
 
-Predisposizione alle "mod" (test degli effetti elementali)
+🧠 Stato Attuale del Progetto
 
-Test degli effetti elementali (fuoco, elettrico e tossico)
+Il software è ora un simulatore di Danno modulare con sistema critico, scudi, armature ed effetti elementali.
 
-  13/02/2026
-Ho racchiuso in un metodo (CalculateDamage) il calcolo del danno, dentro la classe Weapon. 
-- Si occuperà di verificare se il nemico ha SCUDI, ARMATURE e SALUTE
-- Assegnerà le priorità (il danno verrà inflitto prima gli scudi, e poi se saranno infranti si passa alla salute. Se la salute ha l'armatura, allora verrà calcolata)
+Base pronta per:
+
+ - Sistema multi-nemico
+ - Resistenze avanzate
+ - Stack di effetti elementali
+ - Sistema mod completo
+ - Evoluzione verso combat engine più complesso

@@ -73,7 +73,7 @@ namespace WEffects
 
             if (id_weapon == 1)
             {
-                weapon.Add(new Weapon { BaseDamage = 6, CritDamage = 2, CritChance = 20, StatusChance = 50, Status = 5, Shot = 4 });
+                weapon.Add(new Weapon { BaseDamage = 6, CritDamage = 2, CritChance = 20, StatusChance = 50, Status = 8, Shot = 4 });
             }
             else if (id_weapon == 2)
             {

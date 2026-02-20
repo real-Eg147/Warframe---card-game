@@ -19,8 +19,7 @@
                 if (factions[0].Shield < 0.0)
                     factions[0].Shield = 0.0;
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write($"||SCUDI = ");
-                return factions[0].Shield;
+                Console.WriteLine($"||SALUTE = {factions[0].Health:F1} ||ARMATURA = {factions[0].Armor:F2} ||SCUDI = {factions[0].Shield:F2}");
             }
 
             // **** ARMATURA ****
@@ -28,8 +27,7 @@
             {
                 damage -= (damage * factions[0].Armor);
                 factions[0].Health -= damage;
-                Console.Write("||SALUTE = ");
-                return factions[0].Health;
+                Console.WriteLine($"||SALUTE = {factions[0].Health:F1} ||ARMATURA = {factions[0].Armor:F2} ||SCUDI = {factions[0].Shield:F2}");
             }
 
             // **** CALCOLO PROBABILITA' E DANNO CRITICO ****
@@ -41,9 +39,7 @@
                 Console.ResetColor();
 
                 factions[0].Health = (damage * CritDamage) - (damage * factions[0].Armor);
-                Console.Write("||SALUTE = ");
-
-                return factions[0].Health;
+                Console.WriteLine($"||SALUTE = {factions[0].Health:F1} ||ARMATURA = {factions[0].Armor:F2} ||SCUDI = {factions[0].Shield:F2}");
             }
             else if (roll <= CritChance && factions[0].Shield == 0.0)
             {
@@ -52,9 +48,7 @@
                 Console.WriteLine($"|| ROLL = {roll}");
                 Console.ResetColor();
                 factions[0].Health = factions[0].Health - (damage * CritDamage);
-
-                return factions[0].Health;
-
+                Console.WriteLine($"||SALUTE = {factions[0].Health:F1} ||ARMATURA = {factions[0].Armor:F2} ||SCUDI = {factions[0].Shield:F2}");
             }
             else if (roll > CritChance && factions[0].Armor == 0 && factions[0].Shield == 0.0)
             {
@@ -62,9 +56,7 @@
                 Console.WriteLine($"||ROLL = {roll}");
 
                 factions[0].Health -= damage;
-                Console.Write("||SALUTE = ");
-
-                return factions[0].Health;
+                Console.WriteLine($"||SALUTE = {factions[0].Health:F1} ||ARMATURA = {factions[0].Armor:F2} ||SCUDI = {factions[0].Shield:F2}");
             }
 
             return damage;

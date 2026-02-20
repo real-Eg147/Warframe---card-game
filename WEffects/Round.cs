@@ -70,6 +70,7 @@
                     { 1, () => StatusEffect.Fire(factions, weapon) },
                     { 3, () => StatusEffect.Toxic(factions, weapon) },
                     { 5, () => StatusEffect.Viral(factions, weapon) },
+                    { 8, () => StatusEffect.Corrosive(factions, weapon) },
                 };
 
                 if (statusActions.TryGetValue(weapon[0].Status, out var action))

@@ -126,9 +126,16 @@
 
         }
 
-        public void Corrosive(List<Factions> factions)
+        public void Corrosive(List<Factions> factions, List<Weapon> weapon)
         {
-
+            var StatusChance = rnd.Next(0, 100);
+            if (StatusChance <= weapon[0].StatusChance)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("EFFETTO CORROSIVO APPLICATO");
+                Console.ResetColor();
+                factions[0].Armor -= 0.1;
+            }
         }
     }
 }
