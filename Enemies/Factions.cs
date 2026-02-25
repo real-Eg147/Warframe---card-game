@@ -1,9 +1,14 @@
-﻿namespace WEffects
+﻿using System.ComponentModel;
+
+namespace WEffects
 {
-    public abstract class Factions
+    public abstract class Factions : INotifyPropertyChanged
     {
         public short Id { get; }
         private static short _nextId = 1;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public double Health { get; set; }
         public double Armor { get; set; }
         public double Shield { get; set; }
