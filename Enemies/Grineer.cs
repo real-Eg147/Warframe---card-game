@@ -12,7 +12,9 @@ namespace Enemies
         public Grineer(short id, Random rnd) : base(id)
         {
             Health = HealthRange.Roll(rnd);
+            MaxHealth = Health;
             Armor = ArmorRange.Roll(rnd);
+            MaxArmor = 1.0;
             Shield = ShieldRange.Roll(rnd);
         }
 
